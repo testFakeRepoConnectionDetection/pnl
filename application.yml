@@ -1,0 +1,27 @@
+app:
+  name: PNL
+  flow-enrichment:
+    data-category-field: data_category
+  integrations:
+    datahub:
+      base-url: https://datahub.internal/api/v1/marks
+      target-application: DataHub
+      data-category: MARK_TO_MARKET
+      payload-format: JSON
+      payload-type: fixture.dto.MarkToMarketRequestDto
+    finance:
+      base-url: https://finance.internal/api/v1/pnl
+      target-application: Finance
+      data-category: PNL_PACK
+      payload-format: JSON
+      payload-type: fixture.dto.PnlPackDto
+
+spring:
+  kafka:
+    consumer:
+      group-id: pnl-engine
+      topic: trade.economics
+      produced-by-application: Booking
+      message:
+        data-category: TRADE_ECONOMICS
+        payload-format: AVRO
