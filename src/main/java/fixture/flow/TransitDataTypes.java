@@ -6,6 +6,9 @@ package fixture.flow;
  */
 public final class TransitDataTypes {
 
+  /** Node attribute business_function for PNL. */
+  public static final String BUSINESS_FUNCTION = "MIDDLE_OFFICE";
+
   public static final String API_MARK_TO_MARKET = "MARK_TO_MARKET";
   public static final String HTTP_PNL_PACK = "PNL_PACK";
 
