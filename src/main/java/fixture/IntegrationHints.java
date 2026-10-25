@@ -1,19 +1,17 @@
 package fixture;
 
-import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
- * P&L engine. Consumes Booking economics, marks them with DataHub, sends the pack to Finance.
+ * P&L engine. Receives marks from DataHub and sends the pack to Finance.
  *
- * <p>data_category: TRADE_ECONOMICS (Kafka inbound), MARK_TO_MARKET (HTTP outbound),
- * PNL_PACK (HTTP outbound).
+ * <p>data_category: MARK_TO_MARKET (HTTP inbound), PNL_PACK (HTTP outbound).
  */
+@RestController
+@RequestMapping("/api/v1/marks")
 public class IntegrationHints {
 
-  /** data_category TRADE_ECONOMICS — produced by Booking */
-  @KafkaListener(topics = "trade.economics", groupId = "pnl-engine")
-  public void onTradeEconomics(String payload) {}
-
-  // HTTP POST datahub /api/v1/marks — data_category MARK_TO_MARKET (fixture.dto.MarkToMarketRequestDto)
+  // POST /api/v1/marks from DataHub — data_category MARK_TO_MARKET
   // HTTP POST finance /api/v1/pnl — data_category PNL_PACK (fixture.dto.PnlPackDto)
 }
