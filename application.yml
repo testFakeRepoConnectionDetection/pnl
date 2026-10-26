@@ -3,18 +3,20 @@ app:
   business_function: MIDDLE_OFFICE
   pillar: "Booking & PNL & REG"
   flow-enrichment:
-    data-category-field: data_category
-  integrations:
-    finance:
-      base-url: https://finance.internal/api/v1/pnl
-      target-application: Finance
-      data-category: PNL_PACK
-      payload-format: JSON
-      payload-type: fixture.dto.PnlPackDto
+    data-field: data
+    frequency-field: frequency
   api:
-    marks:
-      path: /api/v1/marks
-      data-category: MARK_TO_MARKET
+    cashflows:
+      path: /api/v1/cashflows
       called-by-application: DataHub
+      connection-kind: API
+      data: cashflow
+      frequency: daily
+    pv:
+      path: /api/v1/pv
+      called-by-application: DataHub
+      connection-kind: API
+      data: PV
+      frequency: daily
   callers:
     - DataHub

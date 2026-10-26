@@ -3,18 +3,18 @@
 Business function: `MIDDLE_OFFICE` (`app.business_function`).
 Pillar: `Booking & PNL & REG` (`app.pillar`).
 
-Profit and loss. Receives marks from DataHub and sends the pack to Finance.
+Profit and loss.
 
 ## Integrations (topology)
 
-- Exposes `/api/v1/marks` called by **DataHub**.
-- Posts the P&L pack to **Finance** on `/api/v1/pnl`.
+- Exposes `/api/v1/cashflows` called by **DataHub**.
+- Exposes `/api/v1/pv` called by **DataHub**.
 
 ## Data transiting on flows (Data Model fixture)
 
-| Peer | Kind | direction | Channel | data_category |
-|------|------|-----------|---------|---------------|
-| DataHub | API | inbound | /marks | `MARK_TO_MARKET` |
-| Finance | API | outbound | /pnl | `PNL_PACK` |
+| Peer | direction | Kind | Channel | data | frequency |
+|------|-----------|------|---------|------|-----------|
+| DataHub | inbound | API | /api/v1/cashflows | `cashflow` | `daily` |
+| DataHub | inbound | API | /api/v1/pv | `PV` | `daily` |
 
-Constants: `fixture.flow.TransitDataTypes`. DTO: `PnlPackDto`.
+See `TransitDataTypes.java` and `application.yml` (`data`, `frequency`).

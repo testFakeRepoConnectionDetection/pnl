@@ -1,8 +1,8 @@
 package fixture.flow;
 
 /**
- * Data categories on PNL flows.
- * grep: data_category MARK_TO_MARKET PNL_PACK
+ * Edge attributes on PNL flows.
+ * grep: data frequency cashflow PV daily
  */
 public final class TransitDataTypes {
 
@@ -12,10 +12,9 @@ public final class TransitDataTypes {
   /** Node attribute pillar for PNL. */
   public static final String PILLAR = "Booking & PNL & REG";
 
-  public static final String API_MARK_TO_MARKET = "MARK_TO_MARKET";
-  public static final String HTTP_PNL_PACK = "PNL_PACK";
-
-  public static final String PAYLOAD_FORMAT = "JSON";
+  public static final String DATA_CASHFLOW = "cashflow";
+  public static final String DATA_PV = "PV";
+  public static final String FREQUENCY_DAILY = "daily";
 
   private TransitDataTypes() {}
 }
